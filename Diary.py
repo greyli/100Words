@@ -7,14 +7,14 @@ import pygame
 
 date = time.localtime()
 ls = "\n" * 2 # linesep
-os.chdir = (r'D:\Documents') # change dir
+os.chdir = (r'C:\Users\Administrator') # change dir
 
 def main():
     # if folder isn't exist. 
     # create folder tree 'D:\Documents\MyDiary\year\month\'
-    filename = r'D:\Documents\MyDiary'
-    year = r'D:\Documents\MyDiary\%s' %  (str(date.tm_year))
-    month = r'D:\Documents\MyDiary\%s\%s' %  (str(date.tm_year),str(date.tm_mon))
+    filename = r'C:\Users\Administrator\MyDiary'
+    year = r'C:\Users\Administrator\MyDiary\%s' %  (str(date.tm_year))
+    month = r'C:\Users\Administrator\MyDiary\%s\%s' %  (str(date.tm_year),str(date.tm_mon))
     
     if not os.path.exists(filename):
         os.mkdir(filename)
@@ -31,6 +31,7 @@ def resource_path(relative_path):
     引用文件用如下格式：resource_path('resources/complete.wav')
     然后在生成的.spec文件exe = EXE()中加入下面这行：
     [('resources/complete.wav',r'C:\Users\Administrator\resources\complete.wav','music'),],
+    列表中的三项分别为代码中的引用，文件实际的地址，类别
     这样打包后文件会被正确引用
     """
     if hasattr(sys, "_MEIPASS"):
@@ -66,7 +67,7 @@ def write():
     
     content = today + ls + part1 + ls + part2 + ls + part3
     # create file 'D:\Documents\MyDiary\year\month\day.txt'
-    filename = r"D:\Documents\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
+    filename = r"C:\Users\Administrator\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
                                         str(date.tm_mon),str(date.tm_mday))
     f = open(filename,'w')
     f.write(content)
