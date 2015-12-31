@@ -1,31 +1,36 @@
+# _*_ coding:utf-8 _*_ 
 import os
+import sys
 import time
 import Tkinter
 import ScrolledText
-import pygame
-from Tkinter import Menu
-import ttk
 import tkMessageBox
 import tkFileDialog
+import webbrowser
 
+import pygame
+
+from Tkinter import Menu
+
+os.chdir(r'C:\Users\Administrator\projects\Diary')
 ls = "\n" * 2 # linesep
 date = time.localtime()
     
 top = Tkinter.Tk(className="Diary")
-top.geometry('800x600')
+top.geometry('800x600') 
 textPad = ScrolledText.ScrolledText(top, font='Helvetica 16', width=100, height=50)
 
 label = Tkinter.Label(top,text='What happened today?', font='Helvetica 20')
 label.pack(expand=1, padx=10, pady=10,)
 
 def open_command():
+    os.chdir(r'C:\Users\Administrator\MyDiary')
     file = tkFileDialog.askopenfile(parent=top, mode='rb', title='Select a file')
     if file != None:
         contents = file.read()
         textPad.insert('1.0', contents)
-        file.close()
-
-
+        file.close()    
+    
 def save_command():
 
     filename = r'C:\Users\Administrator\MyDiary'
@@ -44,15 +49,15 @@ def save_command():
     if length > 99:
         txt_name = r"C:\Users\Administrator\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
                                             str(date.tm_mon),str(date.tm_mday))
-        file = open(txt_name,'w') 
+        file = open(txt_name,'w')
         today = time.asctime()
         
-        content = today + ls + data
+        content = today + ls + str(length) + " words" + ls + data
         file.write(content)
         file.close()
         
         pygame.mixer.init()  
-        pygame.mixer.music.load(resource_path('resources/complete.wav'))
+        pygame.mixer.music.load(resource_path('resources\complete.wav'))
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
@@ -64,7 +69,7 @@ def save_command():
         
 def exit_command():
     pygame.mixer.init()  
-    pygame.mixer.music.load(resource_path('resources/fail.wav'))
+    pygame.mixer.music.load(resource_path('resources\fail.wav'))
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy() == True:  
         continue
@@ -72,18 +77,17 @@ def exit_command():
         top.destroy()
     
 def about_command():
-    label = tkMessageBox.showinfo("About", """Name: Diary
-Author: Li Hui\nEmail: withlihui@gmail.com""")
+    label = tkMessageBox.showinfo("About", """Diary\nVersion 1.1
+by Li Hui\nwithlihui@gmail.com""")
     
 def rule_command():
     label = tkMessageBox.showinfo("Rules", """Rule 1: You must write no less than 100 words.
-Rule 2: You only can use one emoji in one day.\nRule 3: You can only write one diary in one day.""")
+Rule 2: You can only use one emoji in one day.\nRule 3: You can only write one diary in one day.""")
     
 def detail_command():
-    label = tkMessageBox.showinfo("Details", """1. The file was saved in this address: 
-    C:\Users\Administrator\MyDiary\...\...\
-    \n2.building...""")
+    webbrowser.open("https://github.com/lihuii/Diary")
     
+
 def text_length():
     data = textPad.get('1.0',Tkinter.END+'-1c')
     length = len(data.split())
@@ -116,20 +120,9 @@ filemenu.add_command(label="Reflect", command=open_command, font='Helvetica 20')
 
 helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
-helpmenu.add_command(label="About", command=about_command)
 helpmenu.add_command(label="Rules", command=rule_command, font='Helvetica 20')
-helpmenu.add_command(label="Details", command=detail_command)
-
-
-# ft = ttk.Frame()
-# fb = ttk.Frame()
-
-# ft.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
-# fb.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
-
-# pb_hd = ttk.Progressbar(ft, orient='horizontal', mode='determinate', maximum=100,
-    # value=0, variable=textlength)
-# pb_hd.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
+helpmenu.add_command(label="About Diary", command=about_command)
+helpmenu.add_command(label="Diary Help", command=detail_command)
 
 quit = Tkinter.Button(top, text="Quit",     
     font='Helvetica 20 bold', command=exit_command,
