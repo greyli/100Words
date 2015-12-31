@@ -82,7 +82,7 @@ Rule 2: You only can use one emoji in one day.\nRule 3: You can only write one d
 def detail_command():
     label = tkMessageBox.showinfo("Details", """1. The file was saved in this address: 
     C:\Users\Administrator\MyDiary\...\...\
-    2.building...""")
+    \n2.building...""")
     
 def text_length():
     data = textPad.get('1.0',Tkinter.END+'-1c')
