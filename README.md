@@ -25,5 +25,6 @@ Rule 3: You can only write one diary in one day.<br>
 1.图形界面；------------☑<br>
 2.拼写检查；<br>
 3.年底和月底自动总结完成情况，包括篇数，字数，错字数，生成相应的折线图；<br>
-4.查词<br>
-5.添加表情<br>
+4.查词；<br>
+5.添加表情；<br>
+6.activity calendar。<br>
