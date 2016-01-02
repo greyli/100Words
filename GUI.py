@@ -11,16 +11,27 @@ import webbrowser
 import pygame
 
 from Tkinter import Menu
+from ttk import Style
+import tempfile
+
+ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
+        b'\x16\x00\x00\x00(\x00\x00\x00\x10\x00\x00\x00 \x00\x00\x00\x01\x00'
+        b'\x08\x00\x00\x00\x00\x00@\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        b'\x00\x01\x00\x00\x00\x01') + b'\x00'*1282 + b'\xff'*64
+
+_, ICON_PATH = tempfile.mkstemp()
+with open(ICON_PATH, 'wb') as icon_file:
+    icon_file.write(ICON)
 
 os.chdir(r'C:\Users\Administrator\projects\Diary')
 ls = "\n" * 2 # linesep
 date = time.localtime()
     
 top = Tkinter.Tk(className="Diary")
-top.geometry('800x600') 
+top.geometry('800x600+400+100') 
 textPad = ScrolledText.ScrolledText(top, font='Helvetica 16', width=100, height=50)
-
-label = Tkinter.Label(top,text='What happened today?', font='Helvetica 20')
+top.iconbitmap(default=ICON_PATH)
+label = Tkinter.Label(top,text='What happened today?', font='Helvetica 20 bold', fg="#1e6823")
 label.pack(expand=1, padx=10, pady=10,)
 
 def open_command():
@@ -57,7 +68,7 @@ def save_command():
         file.close()
         
         pygame.mixer.init()  
-        pygame.mixer.music.load(resource_path('resources\complete.wav'))
+        pygame.mixer.music.load(resource_path('resources/complete.wav'))
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
@@ -69,7 +80,7 @@ def save_command():
         
 def exit_command():
     pygame.mixer.init()  
-    pygame.mixer.music.load(resource_path('resources\fail.wav'))
+    pygame.mixer.music.load(resource_path('resources/fail.wav'))
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy() == True:  
         continue
@@ -91,6 +102,10 @@ def detail_command():
 def text_length():
     data = textPad.get('1.0',Tkinter.END+'-1c')
     length = len(data.split())
+    while length > 0:
+        data = textPad.get('1.0',Tkinter.END+'-1c')
+        length = len(data.split())
+        time.sleep(1)
     return length
 
     
@@ -114,25 +129,30 @@ top.config(menu=menu)
 filemenu = Menu(menu)
 menu.add_cascade(label="File", menu=filemenu)
 filemenu.add_command(label="Analysis", command=None)
+filemenu.add_separator()
 filemenu.add_command(label="Reflect", command=open_command, font='Helvetica 20')
-
-# filemenu.add_separator()
 
 helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
 helpmenu.add_command(label="Rules", command=rule_command, font='Helvetica 20')
+helpmenu.add_separator()
 helpmenu.add_command(label="About Diary", command=about_command)
 helpmenu.add_command(label="Diary Help", command=detail_command)
 
+data = textPad.get('1.0',Tkinter.END+'-1c')
+length = len(data.split())
+
 quit = Tkinter.Button(top, text="Quit",     
     font='Helvetica 20 bold', command=exit_command,
-        bg="white", fg="black")
+        bg="white", fg="red")
+
+quit.style = Style()
+quit.style.theme_use("default")        
 quit.pack(fill=Tkinter.X, expand=0, padx=15, pady=15, ipadx=5, ipady=5, side = Tkinter.BOTTOM, anchor='e')
 
-  
 save = Tkinter.Button(top, text="Save", 
     font='Helvetica 20 bold', command=save_command,
-        bg="black", fg="white")
+        bg="#d6e685", fg="black")
 save.pack(fill=Tkinter.X, expand=0, padx=15, pady=15, ipadx=5, ipady=5, side = Tkinter.BOTTOM, anchor='e' )
 
 textPad.pack(fill=Tkinter.X, expand=1, padx=20, pady=20, side = Tkinter.TOP)
