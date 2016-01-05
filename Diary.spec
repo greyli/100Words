@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['Diary.py'],
-             pathex=['C:\\Users\\Administrator\\projects\\GTD_tools'],
+a = Analysis(['diary.py'],
+             pathex=['C:\\Users\\Administrator\\projects\\Diary'],
              binaries=None,
              datas=None,
              hiddenimports=[],
@@ -21,10 +21,21 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          [('resources/complete.wav',r'C:\Users\Administrator\projects\Diary\resources\complete.wav','music'),],
-          name='Diary',
+          [('resources/complete.wav',r'C:\Users\Administrator\projects\Diary\resources\complete.wav','music'),
+          ('resources/fail.wav',r'C:\Users\Administrator\projects\Diary\resources\fail.wav','music'),
+          ('resources/smile.png',r'C:\Users\Administrator\projects\Diary\resources\smile.png','music'),
+          ('resources/me.jpg',r'C:\Users\Administrator\projects\Diary\resources\me.jpg','music'),],
+          name='100 Words',
           icon='diary.ico',
           debug=False,
           strip=None,
           upx=True,
-          console=True )
+          console=False )
+
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=None,
+               upx=True,
+               name='100 Words')
