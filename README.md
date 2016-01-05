@@ -4,7 +4,7 @@
 
 ##功能说明
 1.自动创建 'C:\Users\Administrator\MyDiary\年\月\' 目录树及文件。<br>
-2.以日为文件名创建txt文件，txt文件开头写入日期、字数。<br>
+2.以日为文件名创建txt文件，txt文件开头写入日期与时间。<br>
 3.每篇日记要求字数100。<br>
 4.查看以往日记点击File-Reflect。<br>
 <b>5.查看以往日记不支持再编辑，点击保存会添加到当天内容。</b><br>
@@ -19,7 +19,7 @@
 ##Rules
 Rule 1: You must write no less than 100 words.<br>
 Rule 2: You can only use one emoji in one day.<br>
-Rule 3: You can only write one diary in one day.<br>
+Rule 3: You can not change the previous diary.<br>
 
 ##打包说明
 1.根目录下的exe文件是用pyinstaller打包。<br>
