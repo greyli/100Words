@@ -7,7 +7,14 @@
 2.以日为文件名创建txt文件，txt文件开头写入日期、字数。<br>
 3.每篇日记要求字数100。<br>
 4.查看以往日记点击File-Reflect。<br>
-<b>5.查看以往日记不支持再编辑，点击保存会替换当天文件。</b>
+<b>5.查看以往日记不支持再编辑，点击保存会添加到当天内容。</b>
+6.数据统计。
+
+##使用说明
+1.点击Download ZIP下载文件。
+2.解压取出可执行文件（100 Words.exe）和字体文件（Purisa.ttf），其他可删除；
+3.双击安装字体文件。
+4.然后就可以打开程序了。
 
 ##Rules
 Rule 1: You must write no less than 100 words.<br>
@@ -24,7 +31,8 @@ Rule 3: You can only write one diary in one day.<br>
 ##待实现功能
 1.图形界面；------------☑<br>
 2.拼写检查；<br>
-3.年底和月底自动总结完成情况，包括篇数，字数，错字数，生成相应的折线图；<br>
-4.查词；<br>
-5.添加表情；<br>
-6.activity calendar。<br>
+3.年底自动总结完成情况，包括每月完成量，生成折线图；<br>
+4.添加表情；<br>
+5.activity calendar。<br>
+6.图标问题。<br>
+7.反馈。<br>
