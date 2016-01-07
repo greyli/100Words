@@ -26,7 +26,7 @@ _, ICON_PATH = tempfile.mkstemp()
 with open(ICON_PATH, 'wb') as icon_file:
     icon_file.write(ICON)
 
-# os.chdir(r'C:\Users\Administrator\projects\Diary')
+os.chdir(r'C:\Users\Administrator\projects\Diary')
 
 def open_command():
     os.chdir(r'C:\Users\Administrator\MyDiary')
@@ -96,11 +96,11 @@ def analysis_command():
     top.mainloop()
 
 def exit_command():
-    pygame.mixer.init()  
-    pygame.mixer.music.load(resource_path('resources/fail.wav'))
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy() == True:  
-        continue
+    # pygame.mixer.init()  
+    # pygame.mixer.music.load(resource_path('resources/fail.wav'))
+    # pygame.mixer.music.play()
+    # while pygame.mixer.music.get_busy() == True:  
+        # continue
     if tkMessageBox.askokcancel("Quit", "I feel very sorry about your abandonment.\n: ("):
         root.destroy()
     
@@ -203,11 +203,11 @@ textPad = ScrolledText.ScrolledText(root, font='Purisa 16', width=100, height=80
 quit = Tkinter.Button(root, text="Quit",     
 font='Purisa 20 bold', command=exit_command,
 bg="#80b3ff", fg="red")        
-quit.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e')
+quit.pack(expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e')
 
 save = Tkinter.Button(root, text="Save", font='Purisa 20 bold', 
 command=save_command,bg="#ccff66", fg="black")
-save.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e' )
+save.pack(expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e' )
 
 menubar = Tkinter.Menu(root)
 root.config(menu=menubar)
