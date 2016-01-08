@@ -1,8 +1,8 @@
 # Diary
-每天一篇英语日记<br>
+### 每天一篇英语日记<br>
 这是一个英语日记写作程序，可以作为英语学习<b>辅助</b>使用。假如你正在学习英语，每天都有一定量的输入，比如说阅读或是听播客，那么你可以使用它来进行复习和回顾。每天一百个单词也许很少，但是通过长久的积累，同时搭配语法的学习和大量语料的输入，写作水平就会得到指数级的提高。
 
-![UI](https://raw.github.com/lihuii/100Words/master/resources/mydiary.jpg)
+![UI](https://raw.github.com/lihuii/100Words/master/resources/mydiary.JPG)
 
 ##功能说明
 1.自动创建 'C:\Users\Administrator\MyDiary\年\月\' 目录树及文件。<br>
@@ -15,7 +15,7 @@
 ##使用说明
 1.点击Download ZIP下载文件。<br>
 2.解压取出可执行文件（100 Words.exe）和字体文件（Purisa.ttf），其他可删除；<br>
-3.双击安装字体文件。<br>
+<b>3.双击安装字体文件。<br></b>
 4.然后就可以打开程序了。<br>
 
 ##Rules
@@ -37,4 +37,4 @@ Rule 3: You can not change the previous diary.<br>
 4.添加表情；<br>
 5.activity calendar。<br>
 6.图标问题。<br>
-7.反馈。<br>
+7.反馈。------------☑<br>
