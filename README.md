@@ -2,6 +2,8 @@
 每天一篇英语日记<br>
 这是一个英语日记写作程序，可以作为英语学习<b>辅助</b>使用。
 
+![UI](/rescources/mydiary.jpg)
+
 ##功能说明
 1.自动创建 'C:\Users\Administrator\MyDiary\年\月\' 目录树及文件。<br>
 2.以日为文件名创建txt文件，txt文件开头写入日期与时间。<br>
