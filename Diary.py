@@ -2,7 +2,6 @@
 import os
 import sys
 import time
-import locale
 import Tkinter
 import ScrolledText
 import tkMessageBox
@@ -10,31 +9,28 @@ import tkFileDialog
 import webbrowser
 
 import pygame
-import PIL
 from PIL import Image, ImageTk
 import tempfile
 
-import smtplib,poplib
+import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 
 date = time.localtime()
-ls = "\n" * 2 # linesep x 2
+ls = "\n" * 2   # linesep x 2
 
 # hide the 'tk' icon
 ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
         b'\x16\x00\x00\x00(\x00\x00\x00\x10\x00\x00\x00 \x00\x00\x00\x01\x00'
         b'\x08\x00\x00\x00\x00\x00@\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
         b'\x00\x01\x00\x00\x00\x01') + b'\x00'*1282 + b'\xff'*64
-
-       
 _, ICON_PATH = tempfile.mkstemp()
 with open(ICON_PATH, 'wb') as icon_file:
     icon_file.write(ICON)
 
 # os.chdir(r'C:\Users\Administrator\projects\Diary')
+
 
 def open_command():
     os.chdir(r'C:\Users\Administrator\MyDiary')
@@ -43,12 +39,13 @@ def open_command():
         contents = file.read()
         textPad.insert('1.0', contents)
         file.close()
-    
+
+
 def save_command():
     
     filename = r'C:\Users\Administrator\MyDiary'
     year = r'C:\Users\Administrator\MyDiary\%s' %  (str(date.tm_year))
-    month = r'C:\Users\Administrator\MyDiary\%s\%s' %  (str(date.tm_year),str(date.tm_mon))
+    month = r'C:\Users\Administrator\MyDiary\%s\%s' %  (str(date.tm_year), str(date.tm_mon))
     
     if not os.path.exists(filename):
         os.mkdir(filename)
@@ -58,12 +55,12 @@ def save_command():
         os.mkdir(month)
     
     # judge user input is 100 words or not.
-    data = textPad.get('1.0',Tkinter.END+'-1c')
+    data = textPad.get('1.0', Tkinter.END+'-1c')
     length = len(data.split())
     if length > 99:
         txt_name = r"C:\Users\Administrator\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
-                                            str(date.tm_mon),str(date.tm_mday))
-        file = open(txt_name,'a')
+                                            str(date.tm_mon), str(date.tm_mday))
+        file = open(txt_name, 'a')
         today = time.asctime()
         
         content = today + ls + data + ls
@@ -79,15 +76,17 @@ def save_command():
         if tkMessageBox.askokcancel("Success", "Mission Complete!\nSee you tomorrow!\n: )"):
             root.destroy()
     else:
-        label = tkMessageBox.showinfo("Sorry","Too short: only %d words!" % length)
-        
+        label = tkMessageBox.showinfo("Sorry", "Too short: only %d words!" % length)
+
+
 def analysis_command():
     top = Tkinter.Toplevel()
     top.title("Data Analysis")
     top.geometry("800x200+350+300")
     # Count up the sum of diary.
-    Diary_sum = sum([len(files) for root,dirs,files in os.walk(r'C:\Users\Administrator\MyDiary')])
-    Year_sum = sum([len(files) for root,dirs,files in os.walk(r'C:\Users\Administrator\MyDiary\%s' % str(date.tm_year))])
+    Diary_sum = sum([len(files) for root, dirs, files in os.walk(r'C:\Users\Administrator\MyDiary')])
+    Year_sum = sum([len(files) for root, dirs, files in os.walk(r'C:\Users\Administrator\MyDiary\%s'
+    % str(date.tm_year))])
     Month_sum = len(os.listdir(r'C:\Users\Administrator\MyDiary\%s\%s' % (str(date.tm_year),
                                             str(date.tm_mon))))
 
@@ -97,59 +96,62 @@ def analysis_command():
     label2 = Tkinter.Label(top, text="This Month: %d" % Month_sum, font='Purisa 16')
     label3 = Tkinter.Label(top, text="Sum: %d" % Diary_sum, font='Purisa 16')
         
-    label.pack(padx=5,pady=5)
-    label1.pack(padx=5,pady=5)
-    label2.pack(padx=5,pady=5)
-    label3.pack(padx=5,pady=5)
+    label.pack(padx=5, pady=5)
+    label1.pack(padx=5, pady=5)
+    label2.pack(padx=5, pady=5)
+    label3.pack(padx=5, pady=5)
     top.mainloop()
+
 
 def exit_command():
     if tkMessageBox.askokcancel("Quit", "I feel very sorry about your abandonment.\n: ("):
         root.destroy()
-    
+
+
 def about_command():
     top = Tkinter.Toplevel()
     top.title("About")
-    
-    label = Tkinter.Label(top, text="100 Words", 
+
+    label = Tkinter.Label(top, text="100 Words",
         font='Purisa 20 bold', fg='#1e6823')
     label1 = Tkinter.Label(top, text="""v1.1
 by Li Hui\nwithlihui@gmail.com""", font="Purisa 16 ")
-    
-    label.pack(padx=5,pady=5)
+
+    label.pack(padx=5, pady=5)
     label1.pack()
     
     img = Image.open(resource_path("resources/me.jpg"))
     me = ImageTk.PhotoImage(img)
-    label2 = Tkinter.Label(top,image=me)
+    label2 = Tkinter.Label(top, image=me)
     label2.image = me
     label2.pack()
     
     top.mainloop()
-    
+
+
 def rule_command():
-    
     top = Tkinter.Toplevel()
     top.title("Rules")
     top.geometry("820x300+400+300")
-    
-    label = Tkinter.Label(top, text="Three Rules: ", 
-    font='Purisa 20 bold', fg='#1e6823')
+
+    label = Tkinter.Label(top, text="Three Rules: ",
+                          font='Purisa 20 bold', fg='#1e6823')
     label1 = Tkinter.Label(top, text="Rule 1: You must write no less than 100 words.", font='Purisa 16')
     label2 = Tkinter.Label(top, text="Rule 2: You can only use one emoji in one day (in building...) .", font='Purisa 16')
     label3 = Tkinter.Label(top, text="Rule 3: You can not change the previous diary.", font='Purisa 16')
-        
-    label.pack(padx=5,pady=5)
-    label1.pack(padx=5,pady=5)
-    label2.pack(padx=5,pady=5)
-    label3.pack(padx=5,pady=5)
+
+    label.pack(padx=5, pady=5)
+    label1.pack(padx=5, pady=5)
+    label2.pack(padx=5, pady=5)
+    label3.pack(padx=5, pady=5)
     
     top.mainloop()
 
 
 def detail_command():
     webbrowser.open("https://github.com/lihuii/Diary")
-    
+
+
 def feedback_command():
     global email_top, name_entry, email_entry, fb_text
     email_top = Tkinter.Toplevel()
@@ -194,7 +196,7 @@ def send_feedback():
     
     name = Tkinter.Entry.get(name_entry)
     email = Tkinter.Entry.get(email_entry)
-    content = fb_text.get('1.0',Tkinter.END)
+    content = fb_text.get('1.0', Tkinter.END)
     feedback = name + ls + email + ls + content
 
     if len(feedback) < 6:
@@ -210,16 +212,16 @@ def send_feedback():
     password = "december"
 
     msg = MIMEMultipart()
-    content = MIMEText(feedback,'plain','utf-8')
+    content = MIMEText(feedback, 'plain', 'utf-8')
 
-    msg['Subject'] = Header(subject,'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
     msg['From'] = sender
     msg['To'] = ",".join(receiver)
     msg.attach(content)
 
     smtp = smtplib.SMTP(smtpserver)
-    smtp.login(username,password)
-    smtp.sendmail(sender,receiver,msg.as_string())
+    smtp.login(username, password)
+    smtp.sendmail(sender,receiver, msg.as_string())
     smtp.quit()
     
     if tkMessageBox.askokcancel("Success!", "Thanks for your suggestions or feedback."):
@@ -260,14 +262,13 @@ label2.pack()
 
 textPad = ScrolledText.ScrolledText(root, font='Purisa 16', width=140, height=100)
 
-quit = Tkinter.Button(root, text="Quit",     
-font='Purisa 20 bold', command=exit_command,
-bg="#80b3ff", fg="red")        
+quit = Tkinter.Button(root, text="Quit", font='Purisa 20 bold',
+                      command=exit_command,bg="#80b3ff", fg="red")
 quit.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, side=Tkinter.BOTTOM, anchor='e')
 
-save = Tkinter.Button(root, text="Save", font='Purisa 20 bold', 
+save = Tkinter.Button(root, text="Save", font='Purisa 20 bold',
 command=save_command,bg="#ccff66", fg="black")
-save.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e' )
+save.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e')
 
 menubar = Tkinter.Menu(root)
 root.config(menu=menubar)
