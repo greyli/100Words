@@ -17,6 +17,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 
+from spell import correct
 date = time.localtime()
 ls = "\n" * 2   # linesep x 2
 
@@ -42,7 +43,7 @@ def open_command():
 
 
 def save_command():
-    
+
     filename = r'C:\Users\Administrator\MyDiary'
     year = r'C:\Users\Administrator\MyDiary\%s' %  (str(date.tm_year))
     month = r'C:\Users\Administrator\MyDiary\%s\%s' %  (str(date.tm_year), str(date.tm_mon))
@@ -56,8 +57,15 @@ def save_command():
     
     # judge user input is 100 words or not.
     data = textPad.get('1.0', Tkinter.END+'-1c')
+    # for word in data.split():
+    #     if word != correct(word):
+    #         print correct(word)
+
     length = len(data.split())
     if length > 99:
+
+
+
         txt_name = r"C:\Users\Administrator\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
                                             str(date.tm_mon), str(date.tm_mday))
         file = open(txt_name, 'a')
@@ -76,7 +84,7 @@ def save_command():
         if tkMessageBox.askokcancel("Success", "Mission Complete!\nSee you tomorrow!\n: )"):
             root.destroy()
     else:
-        label = tkMessageBox.showinfo("Sorry", "Too short: only %d words!" % length)
+        label = tkMessageBox.showinfo("Sorry", "Too short: Only %d words!" % length)
 
 
 def analysis_command():
@@ -104,7 +112,7 @@ def analysis_command():
 
 
 def exit_command():
-    if tkMessageBox.askokcancel("Quit", "I feel very sorry about your abandonment.\n: ("):
+    if tkMessageBox.askokcancel("Quit", "I feel very sorry about your abandonment.\nReally want to QUIT? : ("):
         root.destroy()
 
 
@@ -125,8 +133,7 @@ by Li Hui\nwithlihui@gmail.com""", font="Purisa 16 ")
     label2 = Tkinter.Label(top, image=me)
     label2.image = me
     label2.pack()
-    
-    top.mainloop()
+
 
 
 def rule_command():
