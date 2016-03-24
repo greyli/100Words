@@ -30,8 +30,6 @@ _, ICON_PATH = tempfile.mkstemp()
 with open(ICON_PATH, 'wb') as icon_file:
     icon_file.write(ICON)
 
-# os.chdir(r'C:\Users\Administrator\projects\Diary')
-
 
 def open_command():
     os.chdir(r'C:\Users\Administrator\MyDiary')
@@ -63,8 +61,6 @@ def save_command():
 
     length = len(data.split())
     if length > 99:
-
-
 
         txt_name = r"C:\Users\Administrator\MyDiary\%s\%s\%s.txt" % (str(date.tm_year),
                                             str(date.tm_mon), str(date.tm_mday))
@@ -133,7 +129,6 @@ by Li Hui\nwithlihui@gmail.com""", font="Purisa 16 ")
     label2 = Tkinter.Label(top, image=me)
     label2.image = me
     label2.pack()
-
 
 
 def rule_command():
@@ -228,7 +223,7 @@ def send_feedback():
 
     smtp = smtplib.SMTP(smtpserver)
     smtp.login(username, password)
-    smtp.sendmail(sender,receiver, msg.as_string())
+    smtp.sendmail(sender, receiver, msg.as_string())
     smtp.quit()
     
     if tkMessageBox.askokcancel("Success!", "Thanks for your suggestions or feedback."):
@@ -259,7 +254,7 @@ root.iconbitmap(default=ICON_PATH)
 img = Image.open(resource_path("resources/smile.png"))
 smile = ImageTk.PhotoImage(img)
 
-label1 = Tkinter.Label(root,image=smile)
+label1 = Tkinter.Label(root, image=smile)
 label1.image = smile      
 
 label2 = Tkinter.Label(root, text='What happened today?', font='Purisa 20 bold', fg="#1e6823")  
@@ -269,12 +264,12 @@ label2.pack()
 
 textPad = ScrolledText.ScrolledText(root, font='Purisa 16', width=140, height=100)
 
-quit = Tkinter.Button(root, text="Quit", font='Purisa 20 bold',
-                      command=exit_command,bg="#80b3ff", fg="red")
-quit.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, side=Tkinter.BOTTOM, anchor='e')
+quit_bt = Tkinter.Button(root, text="Quit", font='Purisa 20 bold',
+                      command=exit_command, bg="#80b3ff", fg="red")
+quit_bt.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, side=Tkinter.BOTTOM, anchor='e')
 
 save = Tkinter.Button(root, text="Save", font='Purisa 20 bold',
-command=save_command,bg="#ccff66", fg="black")
+                      command=save_command, bg="#ccff66", fg="black")
 save.pack(fill=Tkinter.X, expand=0, padx=10, pady=10, ipadx=2, ipady=2, side=Tkinter.BOTTOM, anchor='e')
 
 menubar = Tkinter.Menu(root)
