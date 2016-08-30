@@ -19,6 +19,7 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from Tkinter import *
 
+from translate import GetToken, GetTextAndTranslate
 #from spell import correct
 date = time.localtime()
 ls = "\n" * 2   # linesep x 2
@@ -282,10 +283,10 @@ def translate_word():
     
 def get_result():
     word = Tkinter.Entry.get(word_entry)
-    # 获取结果
-    # 先清空文本
-    result = "Dog\n狗"
-    result_text.insert('1.0', result)        
+    finalToken = GetToken()
+    result = GetTextAndTranslate(finalToken, word) # get result
+    result_text.delete('1.0', 'end') # clear
+    result_text.insert('1.0',result)
 
     
 def feedback_command():
